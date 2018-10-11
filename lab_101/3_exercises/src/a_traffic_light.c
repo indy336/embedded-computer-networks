@@ -34,28 +34,30 @@ int main()
 	// loop forever...
 	while (1)
 	{	
-		// turn red led on
-		HAL_GPIO_WritePin ( GPIOI,GPIO_PIN_1, GPIO_PIN_SET);
-		HAL_Delay(1000);
 		
-		// turn yellow led on
-		HAL_GPIO_WritePin ( GPIOB,GPIO_PIN_14, GPIO_PIN_SET);
-		HAL_Delay(1000);
 		
-		// turn red led off
-		HAL_GPIO_WritePin ( GPIOI,GPIO_PIN_1, GPIO_PIN_RESET);
-		HAL_Delay(1000);
-		
-		// turn yellow led off
-		HAL_GPIO_WritePin ( GPIOB,GPIO_PIN_14, GPIO_PIN_RESET);
-		
-		// turn green led on
-		HAL_GPIO_WritePin ( GPIOB,GPIO_PIN_15, GPIO_PIN_SET);
-		HAL_Delay(2000);
-		// turn green led off
-		HAL_GPIO_WritePin ( GPIOB,GPIO_PIN_15, GPIO_PIN_RESET);
-		HAL_Delay(1000);
-		
+//		// turn red led on
+//		HAL_GPIO_WritePin ( GPIOI,GPIO_PIN_1, GPIO_PIN_SET);
+//		HAL_Delay(1000);
+//		
+//		// turn yellow led on
+//		HAL_GPIO_WritePin ( GPIOB,GPIO_PIN_14, GPIO_PIN_SET);
+//		HAL_Delay(1000);
+//		
+//		// turn red led off
+//		HAL_GPIO_WritePin ( GPIOI,GPIO_PIN_1, GPIO_PIN_RESET);
+//		HAL_Delay(1000);
+//		
+//		// turn yellow led off
+//		HAL_GPIO_WritePin ( GPIOB,GPIO_PIN_14, GPIO_PIN_RESET);
+//		
+//		// turn green led on
+//		HAL_GPIO_WritePin ( GPIOB,GPIO_PIN_15, GPIO_PIN_SET);
+//		HAL_Delay(2000);
+//		// turn green led off
+//		HAL_GPIO_WritePin ( GPIOB,GPIO_PIN_15, GPIO_PIN_RESET);
+//		HAL_Delay(1000);
+//		
 		
 		
 		

@@ -12,6 +12,8 @@
 #include "pinmappings.h"
 #include "clock.h"
 #include "gpio.h"
+#include "random_numbers.h"
+
 
 // map the led to GPIO PA8
 gpio_pin_t led = {PI_1, GPIOI, GPIO_PIN_1};
@@ -19,5 +21,6 @@ gpio_pin_t led = {PI_1, GPIOI, GPIO_PIN_1};
 // this is the main method
 int main()
 {
-
+	// initialise random
+	init_random();
 }

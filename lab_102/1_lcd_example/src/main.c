@@ -67,6 +67,7 @@ int main()
   {
     // format a string based around the uptime counter
     char str[20];
++
     sprintf(str, "%d s", counter++);
     
     // print the message to the lcd

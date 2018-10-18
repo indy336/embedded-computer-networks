@@ -24,7 +24,7 @@
 // specify a welcome message
 const char * welcome_message[2] = 
 {
-  "*     Ioannis Anastasiou     *",
+  "*     Ioannis Anastasiou   *",
   "*      Welcome to SHU      *"
 };
 

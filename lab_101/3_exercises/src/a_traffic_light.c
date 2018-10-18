@@ -13,14 +13,20 @@
 #include "clock.h"
 #include "gpio.h"
 
+<<<<<<< HEAD
 // map the led to GPIO PI
 gpio_pin_t led1 = {PI_1, GPIOI, GPIO_PIN_1};
 gpio_pin_t led2 = {PB_14, GPIOB, GPIO_PIN_14};
 gpio_pin_t led3 = {PB_15, GPIOB, GPIO_PIN_15};
+=======
+// map the led to gpio pins
+gpio_pin_t led1 = {PA_8,  GPIOA, GPIO_PIN_8};
+>>>>>>> upstream/master
 
 // this is the main method
 int main()
 {
+<<<<<<< HEAD
 	// we need to initialise the hal library and set up the SystemCoreClock
 	// properly
 	HAL_Init();
@@ -74,4 +80,11 @@ int main()
 //		toggle_gpio(led3);
 //		HAL_Delay(1000);
 	}
+=======
+  // we need to initialise the hal library and set up the SystemCoreClock 
+  // properly
+  HAL_Init();
+  init_sysclk_216MHz();
+
+>>>>>>> upstream/master
 }

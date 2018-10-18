@@ -13,14 +13,25 @@
 #include "clock.h"
 #include "gpio.h"
 #include "random_numbers.h"
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/master
 
-// map the led to GPIO PA8
-gpio_pin_t led = {PI_1, GPIOI, GPIO_PIN_1};
+// map the led to gpio pins
+gpio_pin_t led1 = {PA_8,  GPIOA, GPIO_PIN_8};
 
 // this is the main method
 int main()
 {
+<<<<<<< HEAD
 	// initialise random
 	init_random();
+=======
+  // we need to initialise the hal library and set up the SystemCoreClock 
+  // properly
+  HAL_Init();
+  init_sysclk_216MHz();
+
+>>>>>>> upstream/master
 }

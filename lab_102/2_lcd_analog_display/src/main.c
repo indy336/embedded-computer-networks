@@ -70,19 +70,16 @@ int main()
 		
 	// read the potentiometer and echo that value to the terminal
 	uint16_t adc_val = read_adc(pot);	
-	HAL_Delay (adc_val);
-
-	
 
 	// format a string based around the adc value and print to lcd
 	char str[12];
-	sprintf(str, "ADC = %4d", adc_val);
+	sprintf(str, "ADC = %03.2f", (adc_val/4095.0) * 100.0);
 	BSP_LCD_DisplayStringAtLine(6, (uint8_t *)str);
 
 // print the message to the lcd
     BSP_LCD_ClearStringLine(6);
     BSP_LCD_DisplayStringAtLine(6, (uint8_t *)str);
     
-    HAL_Delay(100);
+    HAL_Delay(1000);
 }
 }

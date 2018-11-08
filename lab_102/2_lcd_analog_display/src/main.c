@@ -50,14 +50,14 @@ int main()
   BSP_LCD_SelectLayer(LTDC_ACTIVE_LAYER);
 
   // set the background colour to blue and clear the lcd
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_Clear(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  BSP_LCD_Clear(LCD_COLOR_BLACK);
   
   // set the font to use
   BSP_LCD_SetFont(&Font24); 
   
   // print the welcome message ...
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  BSP_LCD_SetTextColor(LCD_COLOR_RED);
   BSP_LCD_DisplayStringAtLine(0, (uint8_t *)BOARDER);
   BSP_LCD_DisplayStringAtLine(1, (uint8_t *)welcome_message[0]);
   BSP_LCD_DisplayStringAtLine(2, (uint8_t *)welcome_message[1]);
@@ -73,12 +73,18 @@ int main()
 
 	// format a string based around the adc value and print to lcd
 	char str[12];
-	sprintf(str, "ADC = %03.2f", (adc_val/4095.0) * 100.0);
+	sprintf(str, "ADC = %4d", adc_val);
+	BSP_LCD_ClearStringLine(6);
 	BSP_LCD_DisplayStringAtLine(6, (uint8_t *)str);
+		
+	sprintf(str, "ADC = %03.2f", (adc_val/4095.0) * 100.0);
+	BSP_LCD_ClearStringLine(7);
+	BSP_LCD_DisplayStringAtLine(7, (uint8_t *)str);
 
-// print the message to the lcd
-    BSP_LCD_ClearStringLine(6);
-    BSP_LCD_DisplayStringAtLine(6, (uint8_t *)str);
+	BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+	BSP_LCD_FillRect(0, 200, 480, 20);
+	BSP_LCD_SetTextColor(LCD_COLOR_RED);
+	BSP_LCD_FillRect(0, 200, 480*(adc_val/4095.0), 20);
     
     HAL_Delay(1000);
 }

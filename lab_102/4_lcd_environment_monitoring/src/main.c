@@ -85,11 +85,10 @@ int main()
 		uint16_t light_val = read_adc(light);	
 			
 		char str[12];		
+		
 		float light_per = ((light_val - sensor_min) / (float)(sensor_max - sensor_min)) * 100.0;
-		
 		// should constrain the light percentage to be 0 - 100
-		// ...
-		
+		// ...		
 		sprintf(str, "Light = %3.2f", light_per);
 		BSP_LCD_ClearStringLine(6);
 		BSP_LCD_DisplayStringAtLine(6, (uint8_t *)str);

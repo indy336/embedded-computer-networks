@@ -19,6 +19,7 @@
 extern int init_data_thread(void);
 extern int init_display_thread(void);
 
+
 // this is the main method
 int main()
 { 

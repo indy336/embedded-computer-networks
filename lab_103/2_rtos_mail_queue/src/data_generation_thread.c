@@ -35,7 +35,8 @@ osMailQId  mail_box;
 // HARDWARE DEFINES
 
 // led is on PI 1 (this is the inbuilt led)
-//gpio_pin_t led1 = {PI_1, GPIOI, GPIO_PIN_1};
+gpio_pin_t led4 = {PB_8, GPIOB, GPIO_PIN_8};
+
 
 // THREAD INITIALISATION
 
@@ -43,7 +44,7 @@ osMailQId  mail_box;
 int init_data_thread(void)
 {
   // initialize peripherals (i.e. the led and random number generator) here
-  //init_gpio(led1, OUTPUT);
+  init_gpio(led4, OUTPUT);
   init_random();
   
   // create the mailbox
@@ -80,7 +81,7 @@ void data_thread(void const *argument)
     float random = get_random_float();
     
     // toggle led
-    //toggle_gpio(led1);
+    toggle_gpio(led4);
     
     // generate our fake data
     i++;

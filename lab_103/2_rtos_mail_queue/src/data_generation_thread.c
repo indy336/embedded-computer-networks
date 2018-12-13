@@ -88,6 +88,7 @@ void data_thread(void const *argument)
     mail->counter = i;
     mail->current = (1.0f / (random * i)); 
     mail->voltage = (5.0f / (random * i));
+		mail->temperature = (5.0f / (random * i));
     
     // put the data in the mail box and wait for one second
     osMailPut(mail_box, mail);

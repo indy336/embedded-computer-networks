@@ -45,7 +45,7 @@ osThreadDef(led_3_thread, osPriorityNormal, 1, 0);
 // OTHER FUNCTIONS
 
 // function prototype for our dumb delay function
-void dumb_delay(uint32_t delay);
+//void dumb_delay(uint32_t delay);
 
 // THREAD INITIALISATION
 
@@ -105,17 +105,9 @@ void led_3_thread(void const *argument)
   }
 }
 
-// OTHER FUNCTIONS
-
-// dumb delay function
-void dumb_delay(uint32_t delay)
+// OVERRIDE HAL DELAY
+// make HAL_Delay point to osDelay (otherwise any use of HAL_Delay breaks things)
+void HAL_Delay(__IO uint32_t Delay)
 {
-  // just spin through processor cycles to introduce a delay 
-  long delaytime;
-  for(delaytime = 0; delaytime < (delay * 10000); delaytime++)
-  {
-    __nop();
-  }
+  osDelay(Delay);
 }
-
-

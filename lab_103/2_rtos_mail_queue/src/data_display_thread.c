@@ -69,6 +69,7 @@ void display_thread(void const *argument)
       printf("\nVoltage: %.2f V\n\r"   , mail->voltage);
       printf("Current: %.2f A\n\r"     , mail->current);
       printf("Number of cycles: %u\n\r", mail->counter);
+			printf("Temperature: %.2f C\n\r" , mail->temperature);
 
       osMailFree(mail_box, mail);
     }

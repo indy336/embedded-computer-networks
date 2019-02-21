@@ -137,18 +137,18 @@ void process_packet(uint8_t* packet, int length)
 	{
 		printf("%02X ", packet[i]);
 	}
-		printf("\r\n");
+		printf("\r\n\r\n");
 		// print the xbee short address
 		printf("xbee short address is: ");
 		printf("%02X %02X\r\n\r\n", packet[12], packet[13]);
 		
 		// print temp data 
 		printf("Temp data: ");
-		printf("%02x %02x\r\n\r\n", packet[19], packet [20]);
+		printf("%02X %02X\r\n\r\n", packet[19], packet [20]);
 		
 		// print light data
 		printf("Light data: ");
-		printf("%02x %02x\r\n\r\n", packet[21], packet [22]);
+		printf("%02X %02X\r\n\r\n", packet[21], packet [22]);
 
 	// print out the data that we have - this is the bit of the packet that
 	// contains the adc values from the light sensor and temperature sensor

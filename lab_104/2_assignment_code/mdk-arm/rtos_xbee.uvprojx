@@ -7,10 +7,10 @@
 
   <Targets>
     <Target>
-      <TargetName>rtos_application</TargetName>
+      <TargetName>rtos_xbee</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
+      <pCCUsed>5060061::V5.06 update 1 (build 61)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F746NGHx</Device>
@@ -374,6 +374,43 @@
       <Groups>
         <Group>
           <GroupName>application</GroupName>
+          <Files>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>xbee.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\xbee.c</FilePath>
+            </File>
+            <File>
+              <FileName>vcom_serial.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\vcom_serial.c</FilePath>
+            </File>
+            <File>
+              <FileName>itm_debug.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\itm_debug.c</FilePath>
+            </File>
+            <File>
+              <FileName>xbee_processing_thread.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\xbee_processing_thread.c</FilePath>
+            </File>
+            <File>
+              <FileName>xbee_packet_parser.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\xbee_packet_parser.c</FilePath>
+            </File>
+            <File>
+              <FileName>data_display_thread.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\data_display_thread.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>configuration</GroupName>
@@ -832,23 +869,6 @@
         </Group>
         <Group>
           <GroupName>stm32f7_discovery_bsp</GroupName>
-          <Files>
-            <File>
-              <FileName>stm32746g_discovery.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\libraries\bsp\stm32f7_discovery\bsp\src\stm32746g_discovery.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32746g_discovery_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\libraries\bsp\stm32f7_discovery\bsp\src\stm32746g_discovery_lcd.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32746g_discovery_sdram.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\libraries\bsp\stm32f7_discovery\bsp\src\stm32746g_discovery_sdram.c</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>stm32f7_discovery_bsp_shu</GroupName>

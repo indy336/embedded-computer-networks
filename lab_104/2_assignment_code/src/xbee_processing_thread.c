@@ -27,6 +27,9 @@
 // include main.h with the mail type declaration
 #include "main.h"
 
+// include the itm debugging
+#include "itm_debug.h"
+
 // RTOS DEFINES
 
 // declare the thread function prototypes, thread id, and priority
@@ -53,9 +56,8 @@ void process_packet(uint8_t* packet, int length);
 // create the uart thread(s)
 int init_xbee_threads(void)
 {
-	// print a status message to the vcom port
-	init_uart(9600);
-	printf("we are alive!\r\n");
+	// print a status message to the serial debug (printf) window
+	print_debug("we are alive!", 13);
 
 	// create the message queue
 	msg_q = osMessageCreate(osMessageQ(message_q), NULL);
@@ -81,8 +83,8 @@ int init_xbee_threads(void)
 // xbee receive thread
 void xbee_rx_thread(void const *argument)
 {
-	// print some status message ...
-	printf("xbee rx thread running!\r\n");
+	// print some status message to the debug serial window
+	print_debug("xbee rx thread running!", 23);
 
 	// infinite loop ...
 	while(1)
@@ -103,20 +105,13 @@ void xbee_rx_thread(void const *argument)
 			// com port
 			if(len > 0)
 			{
-				printf(">> packet received\r\n");
+				print_debug(">> packet received", 18);
 				
 				// get the packet
 				uint8_t packet[len];
 				get_packet(packet);
 				
-				// display the packet
-				int i = 0;
-				for(i = 0; i < len; i++)
-				{
-					printf("%02X ", packet[i]);
-				}
-				printf("\r\n");
-				
+				// process our complete xbee packet
 				process_packet(packet, len);
 			}			
 		}
@@ -130,44 +125,6 @@ void process_packet(uint8_t* packet, int length)
 	// structure will be wrong)
 	if(packet[3] == 0x92)
 	{
-		// print the xbee long address
-		printf("xbee long address is: ");
-		int i = 0;
-		for(i = 4; i < 12; i++)
-		{
-			printf("%02X ", packet[i]);
-		}
-		printf("\r\n\r\n");
-		// print the xbee short address
-		printf("xbee short address is: ");
-		printf("%02X %02X\r\n\r\n", packet[12], packet[13]);
-		
-		// print out the data that we have - this is the bit of the packet that
-		// contains the adc values from the light sensor and temperature sensor
-		int datastart = 16;
-		if(datastart < (length - 1))
-		{
-			printf("data = ");
-			while(datastart < (length - 1))
-		{
-			printf("%02X ", packet[datastart++]);
-		}
-			printf("\r\n\r\n");
-		}
-		
-//		// print temp data 
-//		printf("Temp data: ");
-//		printf("%02X %02X\r\n\r\n", packet[19], packet [20]);
-//		
-//		int temp = (packet[19]+packet[20]);
-//		
-//		printf("Temp :");
-//		printf("2d\r\n", temp);
-//		
-//		// print light data
-//		printf("Light data: ");
-//		printf("%02X %02X\r\n\r\n", packet[21], packet [22]);
-
 		
 		// extract the raw adc values from the io sample rx packet
 		//
@@ -184,22 +141,25 @@ void process_packet(uint8_t* packet, int length)
 		// if there are no digital channels ...
 		if(packet[16] + packet[17] == 0)
 		{
-			// if there is one analog channel read that
-			if(packet[18] == 1 || packet[18] == 2)
-			{
-				printf("adc 1 value is : %4d\r\n", (packet[19] << 8) | packet[20]);
-			}
 			// if there are two analog channels read both
 			if(packet[18] == 3)
 			{
-				// convert to an integer aand print to display
+				// convert to an integer
 				uint16_t temp = (packet[19] << 8) | packet[20];
 				uint16_t light = (packet[21] << 8) | packet[22];
-				printf("adc 1 value is : %4d\r\n", temp);
-				printf("adc 2 value is : %4d\r\n", light);
+								
+				// put all the data into our mailbox and transfer to the display thread
 				
-				// put into our mailbox (?) and transfer to the display thread
+				// create our mail (i.e. the message container)   
+				mail_t* mail = (mail_t*) osMailAlloc(mail_box, osWaitForever);   
 				
+				// populate the data fields
+				mail->xbee_id = packet[11] | (packet[10] << 8);
+				mail->temperature = temp;
+				mail->light = light;
+				
+				// put the data in the mail box
+				osMailPut(mail_box, mail);
 				
 			}
 		}
